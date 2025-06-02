@@ -14,19 +14,35 @@ atari:
   policy_kwargs: "dict(optimizer_class=RMSpropTFLike, optimizer_kwargs=dict(eps=1e-5))"
 
 CartPole-v1:
-  n_envs: 8
-  n_timesteps: !!float 5e5
+  n_envs: 10
+  n_timesteps: !!float 2e5
   policy: 'MlpPolicy'
-  ent_coef: 0.0
+  n_steps: 1
+  learning_rate: 0.0007
+  learning_rate_dopa: 0.0001
+  ent_coef: 0.5
+  gae_lambda: 0.0
+  tracker_window_size: 1000
+  n_meta_steps: 1
+  net_arch: dict(pi=[64, 64], vf=[64, 64], re=[64,64], v2d=[64], r2d=[64], d2d=[64], da=[64,64], td=[64,64,64,1])        
+  normalize_values: False
 
 LunarLander-v3:
   n_envs: 8
-  n_timesteps: !!float 4e5
+  n_timesteps: !!float 8e5
   policy: 'MlpPolicy'
   gamma: 0.995
   n_steps: 1
   learning_rate: lin_0.00083
+  learning_rate_dopa: 0.0001
   ent_coef: 0.00001
+  gae_lambda: 0.0
+  tracker_window_size: 1000
+  n_meta_steps: 1
+  net_arch: dict(pi=[64, 64], vf=[64, 64], re=[64,64], v2d=[64], r2d=[64], d2d=[64], da=[64,64], td=[64,64,64,1])        
+  normalize_values: False
+
+
 
 MountainCar-v0:
   normalize: true
