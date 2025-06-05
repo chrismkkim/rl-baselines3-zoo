@@ -95,6 +95,7 @@ class ExperimentManager:
         sampler: str = "tpe",
         pruner: str = "median",
         optimization_log_path: Optional[str] = None,
+        train_envs: Optional[dict[str, Any]] = None,
         n_startup_trials: int = 0,
         n_evaluations: int = 1,
         truncate_last_trajectory: bool = False,
@@ -132,7 +133,8 @@ class ExperimentManager:
         self.frame_stack = None
         self.seed = seed
         self.optimization_log_path = optimization_log_path
-
+        self.train_envs = train_envs
+        
         self.vec_env_class = {"dummy": DummyVecEnv, "subproc": SubprocVecEnv}[vec_env_type]
         # Override
         if self.default_vec_env_cls is not None:
@@ -225,14 +227,27 @@ class ExperimentManager:
             return None
         else:
             # Train an agent from scratch
-            model = ALGOS[self.algo](
-                env=env,
-                tensorboard_log=self.tensorboard_log,
-                seed=self.seed,
-                verbose=self.verbose,
-                device=self.device,
-                **self._hyperparams,
-            )
+            if self.algo == 'dopa':
+                model = ALGOS[self.algo](
+                    env=env,
+                    tensorboard_log=self.tensorboard_log,
+                    log_path=self.log_path,
+                    train_envs=self.train_envs,
+                    seed=self.seed,
+                    verbose=self.verbose,
+                    device=self.device,
+                    **self._hyperparams,
+                )
+            else:
+                model = ALGOS[self.algo](
+                    env=env,
+                    tensorboard_log=self.tensorboard_log,
+                    seed=self.seed,
+                    verbose=self.verbose,
+                    device=self.device,
+                    **self._hyperparams,
+                )
+                            
 
         self._save_config(saved_hyperparams)
         return model, saved_hyperparams

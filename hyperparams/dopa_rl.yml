@@ -26,8 +26,7 @@ CartPole-v1:
   n_meta_steps: 1
   net_arch: dict(pi=[64, 64], vf=[64, 64], re=[64,64], v2d=[64], r2d=[64], d2d=[64], da=[64,64], td=[64,64,64,1])        
   normalize_values: False
-  traintype_meta: True
-
+  traintype_meta: False
 
 LunarLander-v3:
   n_envs: 8
@@ -43,7 +42,7 @@ LunarLander-v3:
   n_meta_steps: 1
   net_arch: dict(pi=[64, 64], vf=[64, 64], re=[64,64], v2d=[64], r2d=[64], d2d=[64], da=[64,64], td=[64,64,64,1])        
   normalize_values: False
-  traintype_meta: True
+  traintype_meta: False
 
 
 MountainCar-v0:

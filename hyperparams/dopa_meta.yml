@@ -18,16 +18,15 @@ CartPole-v1:
   n_timesteps: !!float 1e5
   policy: 'MlpPolicy'
   n_steps: 1
+  n_meta_steps: 1
   learning_rate: 0.0007
   learning_rate_dopa: 0.0001
   ent_coef: 0.0
   gae_lambda: 0.0
   tracker_window_size: 1000
-  n_meta_steps: 1
   net_arch: dict(pi=[64, 64], vf=[64, 64], re=[64,64], v2d=[64], r2d=[64], d2d=[64], da=[64,64], td=[64,64,64,1])        
   normalize_values: False
   traintype_meta: True
-
 
 LunarLander-v3:
   n_envs: 8

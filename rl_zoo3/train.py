@@ -121,6 +121,9 @@ def train() -> None:
         "--env-kwargs", type=str, nargs="+", action=StoreDict, help="Optional keyword argument to pass to the env constructor"
     )
     parser.add_argument(
+        "--train-envs", type=str, nargs="+", action=StoreDict, help="Meta and RL training environment"
+    )    
+    parser.add_argument(
         "--eval-env-kwargs",
         type=str,
         nargs="+",
@@ -247,6 +250,7 @@ def train() -> None:
         args.sampler,
         args.pruner,
         args.optimization_log_path,
+        args.train_envs,
         n_startup_trials=args.n_startup_trials,
         n_evaluations=args.n_evaluations,
         truncate_last_trajectory=args.truncate_last_trajectory,
