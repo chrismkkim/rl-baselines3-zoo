@@ -217,7 +217,8 @@ class ExperimentManager:
         # Create env to have access to action space for action noise
         n_envs = 1 if self.algo == "ars" or self.optimize_hyperparameters else self.n_envs
         env = self.create_envs(n_envs, no_log=False)
-
+        n_timesteps = saved_hyperparams['n_timesteps']
+        
         self._hyperparams = self._preprocess_action_noise(hyperparams, saved_hyperparams, env)
 
         if self.continue_training:
@@ -230,6 +231,8 @@ class ExperimentManager:
             if self.algo == 'dopa':
                 model = ALGOS[self.algo](
                     env=env,
+                    n_timesteps = n_timesteps,
+                    n_envs = n_envs,
                     tensorboard_log=self.tensorboard_log,
                     log_path=self.log_path,
                     train_envs=self.train_envs,

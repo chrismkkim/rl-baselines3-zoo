@@ -14,9 +14,8 @@ atari:
   policy_kwargs: "dict(optimizer_class=RMSpropTFLike, optimizer_kwargs=dict(eps=1e-5))"
 
 CartPole-v1:
-  n_envs: 40
-  n_rlnet_reset: 10
-  n_timesteps: !!float 10e5
+  n_envs: 8
+  n_timesteps: !!float 1e5
   policy: 'MlpPolicy'
   n_steps: 1
   n_meta_steps: 1
@@ -25,7 +24,7 @@ CartPole-v1:
   ent_coef: 0.5
   gae_lambda: 0.0
   tracker_window_size: 1000
-  net_arch: dict(pi=[64, 64], vf=[64, 64], re=[64,64], v2d=[64], r2d=[64], d2d=[64], da=[64,64], td=[256,256,256,1])        
+  net_arch: dict(pi=[64, 64], vf=[64, 64], re=[64,64], v2d=[64], r2d=[64], d2d=[64], da=[64,64], td=[64,64,64,1])        
   normalize_values: False
   traintype_meta: True
 
