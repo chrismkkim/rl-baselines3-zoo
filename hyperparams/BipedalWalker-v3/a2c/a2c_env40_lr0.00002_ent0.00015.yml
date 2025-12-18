@@ -1,0 +1,10 @@
+BipedalWalker-v3:
+    n_envs: 40
+    n_timesteps: !!float 640000
+    policy: 'MlpPolicy'
+    n_steps: 1
+    learning_rate: 0.00002
+    ent_coef: 0.00015
+    gamma: 0.99
+    gae_lambda: 0.0
+    max_grad_norm: !!float 1e10

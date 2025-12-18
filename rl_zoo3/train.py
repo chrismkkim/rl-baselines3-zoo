@@ -16,6 +16,15 @@ import rl_zoo3.import_envs  # noqa: F401
 from rl_zoo3.exp_manager import ExperimentManager
 from rl_zoo3.utils import ALGOS, StoreDict
 
+def str2bool(v):
+    if isinstance(v, bool):
+        return v
+    if v.lower() in ("true"):
+        return True
+    if v.lower() in ("false"):
+        return False
+    raise argparse.ArgumentTypeError("Boolean value expected.")
+
 
 def train() -> None:
     parser = argparse.ArgumentParser()
@@ -45,6 +54,13 @@ def train() -> None:
         default=25000,
         type=int,
     )
+    parser.add_argument(
+        "--eval-num",
+        help="Added by CK (7/26/2025). Evaluate the agent n times (if positive, override eval-freq. see exp_manager). "
+        "eval-freq = n_timesteps / eval-num",
+        default=20,
+        type=int,
+    )        
     parser.add_argument(
         "--optimization-log-path",
         help="Path to save the evaluation log and optimal policy for each hyperparameter tried during optimization. "
@@ -235,6 +251,7 @@ def train() -> None:
         args.tensorboard_log,
         args.n_timesteps,
         args.eval_freq,
+        args.eval_num,
         args.eval_episodes,
         args.save_freq,
         args.hyperparams,

@@ -1,0 +1,15 @@
+CartPole-v1:
+    n_envs: 1
+    n_rlnet_reset: 10
+    n_timesteps: !!float 50000
+    policy: 'MlpPolicy'
+    n_steps: 1
+    n_meta_steps: 1
+    learning_rate: !!float 7e-4
+    learning_rate_dopa: !!float 1e-4
+    ent_coef: 0.5
+    gae_lambda: 0.0
+    tracker_window_size: 1000
+    net_arch: dict(pi=[64, 64], vf=[64, 64], re=[64,64], v2d=[64], r2d=[64], d2d=[64], da=[64,64], td=[256,256,256,1])
+    normalize_values: False
+    traintype_meta: True

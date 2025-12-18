@@ -1,0 +1,16 @@
+BipedalWalker-v3:
+    n_envs: 50
+    n_rlnet_reset: 10
+    n_timesteps: !!float 8000000
+    policy: 'MlpPolicy'
+    n_steps: 1
+    n_meta_steps: 1
+    learning_rate: !!float 6.0e-4
+    learning_rate_dopa: !!float 1e-4
+    ent_coef: !!float 15.0e-5
+    gamma: 0.99
+    gae_lambda: 0.0
+    tracker_window_size: 1000
+    net_arch: dict(pi=[64, 64], vf=[64, 64], re=[64,64], td=[128,128,128,1])
+    normalize_values: False
+    traintype_meta: False

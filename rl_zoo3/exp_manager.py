@@ -80,6 +80,7 @@ class ExperimentManager:
         tensorboard_log: str = "",
         n_timesteps: int = 0,
         eval_freq: int = 10000,
+        eval_num: int = 20,
         n_eval_episodes: int = 5,
         save_freq: int = -1,
         hyperparams: Optional[dict[str, Any]] = None,
@@ -152,6 +153,7 @@ class ExperimentManager:
         self.eval_env_kwargs: dict[str, Any] = eval_env_kwargs or self.env_kwargs
         self.save_freq = save_freq
         self.eval_freq = eval_freq
+        self.eval_num  = eval_num
         self.n_eval_episodes = n_eval_episodes
         self.n_eval_envs = n_eval_envs
 
@@ -300,6 +302,7 @@ class ExperimentManager:
 
         :param model:
         """
+        
         print(f"Saving to {self.save_path}")
         model.save(f"{self.save_path}/{self.env_name}")
 
@@ -577,6 +580,11 @@ class ExperimentManager:
 
         # Create test env if needed, do not normalize reward
         if self.eval_freq > 0 and not self.optimize_hyperparameters:
+            if self.eval_num > 0:
+                '''
+                Overwriting self.eval_freq with self.n_timsetps / self.eval_num (modified by CK, 7/26/2025)
+                '''
+                self.eval_freq = self.n_timesteps // self.eval_num            
             # Account for the number of parallel environments
             self.eval_freq = max(self.eval_freq // self.n_envs, 1)
 
