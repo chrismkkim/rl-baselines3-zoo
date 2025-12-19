@@ -15,8 +15,7 @@ atari:
 
 CartPole-v1:
   n_envs: 20
-  n_rlnet_reset: 10
-  n_timesteps: !!float 10e5
+  n_timesteps: !!float 4e5
   policy: 'MlpPolicy'
   n_steps: 1
   n_meta_steps: 1
@@ -27,24 +26,23 @@ CartPole-v1:
   tracker_window_size: 1000
   net_arch: dict(pi=[64, 64], vf=[64, 64], re=[64,64], v2d=[64], r2d=[64], d2d=[64], da=[64,64], td=[256,256,256,1])        
   normalize_values: False
-  traintype_meta: True
+  traintype_meta: False
 
 LunarLander-v3:
-  n_envs: 10
-  n_rlnet_reset: 10
-  n_timesteps: !!float 1e6
+  n_envs: 8
+  n_timesteps: !!float 8e5
   policy: 'MlpPolicy'
-  n_steps: 1
-  n_meta_steps: 1
-  learning_rate: 0.0004
-  learning_rate_dopa: !!float 1e-4
-  ent_coef: 0.5
   gamma: 0.995
+  n_steps: 1
+  learning_rate: lin_0.00083
+  learning_rate_dopa: 0.0001
+  ent_coef: 0.00001
   gae_lambda: 0.0
   tracker_window_size: 1000
-  net_arch: dict(pi=[64, 64], vf=[64, 64], re=[64,64], v2d=[64], r2d=[64], d2d=[64], da=[64,64], td=[128,128,128,1])        
+  n_meta_steps: 1
+  net_arch: dict(pi=[64, 64], vf=[64, 64], re=[64,64], v2d=[64], r2d=[64], d2d=[64], da=[64,64], td=[64,64,64,1])        
   normalize_values: False
-  traintype_meta: True
+  traintype_meta: False
 
 
 MountainCar-v0:
